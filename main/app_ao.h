@@ -6,7 +6,7 @@
 #ifndef APP_AO_H_
 #define APP_AO_H_
 
-#include "kode_ao.h"
+#include "kode_sys.h"
 
 #ifdef __cplusplus
 extern "C" {
