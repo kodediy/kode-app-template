@@ -1,0 +1,15 @@
+## One pin, and everything below the facade arrives at the same commit without
+## being named: kaos, kqp, khal, kdrv, klog, kbsp and the vendored QP/C. Each
+## component's own manifest declares its siblings with override_path, and the
+## manager rewrites those into git dependencies on the SDK at the commit
+## pinned here. Moving to a newer SDK is this one version line.
+##
+## SSH, not HTTPS: the SDK is private, and the manager runs
+## `git submodule update --init --recursive` over the whole of it when it
+## fetches any part - so one key has to cover the SDK and the C5 firmware
+## nested inside it.
+dependencies:
+  kodediy/kode:
+    git: https://github.com/kodediy/kode-sdk.git
+    path: components/kode
+    version: v0.1.0
