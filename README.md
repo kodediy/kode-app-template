@@ -22,6 +22,7 @@ The template is an empty app with the two shapes of code an app has:
 3. Set what the launcher shows: `KODE_APP_MANIFEST("My app", "tools")` in `main/app_main.c`, the name on the pill and up to four categories from the catalog's `categories.txt`.
 4. Set the version: `PROJECT_VER` in `CMakeLists.txt`, raised for every version the catalog publishes.
 5. Replace `appdata/icon.png`, set `appdata/app.json` (its colour and a description of up to 52 characters) and replace the placeholder in `appdata/screenshots/` with screenshots of the app, taken with `kcli.py screenshot`.
+6. Give the app its own README: `git mv -f README.app.md README.md`, then fill it in. Its order puts first what a person arriving from the catalog looks for: what the app is and its screenshots, what it needs, how to use it and what it does; then, below a rule, how to build and install it. The comments in the file say which sections are optional.
 
 ## Writing the app
 
