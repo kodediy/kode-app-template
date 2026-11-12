@@ -59,7 +59,7 @@ void AppAo_start(void)
 static kode_status_t AppAo_job(void *arg, uint32_t *value)
 {
     (void)arg;
-    /* The blocking kode_* calls go here; nothing that reaches the flash, kode_nvs_* included. */
+    /* The blocking kode_* calls go here; nothing that reaches the flash, kode_setting_* included. */
     *value = 0U;
     return KODE_OK;
 }

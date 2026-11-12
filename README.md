@@ -25,14 +25,14 @@ The template is an empty app with the two shapes of code an app has:
 
 ## Writing the app
 
-- **An Active Object never blocks.** Not `kode_delay_ms()`, not any `kode_*` call whose comment in `kode.h` says it blocks. Ask the owner with its request call and handle the answer when it arrives, or hand the waiting to the Active Object's worker.
+- **An Active Object never blocks.** Not `kode_delay()`, not any `kode_*` call whose comment in `kode.h` says it blocks. Ask the owner with its request call and handle the answer when it arrives, or hand the waiting to the Active Object's worker.
 - **Subscribe, then ask.** Every Active Object kodeOS starts already runs when `kode_init()` returns, so what it announced at startup is past. Subscribe first, then request the state you need.
 - **The app's signals are private.** Number them from `MAX_SIG` and post them, never publish them: the bus is sized for kodeOS's signals.
 - **The worker runs one job and decides nothing.** The Active Object submits a function with `kode_worker_submit()` and goes on; when the function returns, the worker posts one `KqpWorkerDoneEvt` with the signal the Active Object chose, the job's sequence number, the status and one value. The Active Object keeps every decision: it keeps the sequence number of the job it waits for, ignores a done event with another, and decides what runs next. Only the Active Object that owns the worker submits to it.
 - **A job's argument outlives the step that submits it.** It lives in the Active Object's state or in a static, never on the stack of the step, because the job may still read it until the done event.
-- **A job never reaches the flash.** Its stack is in PSRAM, which must not run while the flash cache is off: no ESP-IDF flash, partition or NVS call and no `kode_nvs_set()`, `kode_nvs_get()` or `kode_nvs_del()` (see `kode_worker.h`). The job hands the value back in the done event and the Active Object stores it. The worker's stack is 8 KB, the least the catalog accepts (rule C8); raise it for a deep job.
+- **A job never reaches the flash.** Its stack is in PSRAM, which must not run while the flash cache is off: no ESP-IDF flash, partition or NVS call and no `kode_setting_set()` or `kode_setting_get()` (see `kode_worker.h`). The job hands the value back in the done event and the Active Object stores it. The worker's stack is 8 KB, the least the catalog accepts (rule C8); raise it for a deep job.
 - **The queue and the stack** of the Active Object are the two arrays in `app_ao.c`. A published event reaches every subscriber, so a queue too short for a burst is a QP assert, not a dropped event.
-- **Coming home is not the app's job.** Any reset returns to kodeOS, because the app never confirms its own slot (`CONFIG_KODEOS_BOOT_ROLE_APP=y`); holding BOT does it from any app. `kode_exit_to_os()` leaves on purpose.
+- **Coming home is not the app's job.** Any reset returns to kodeOS, because the app never confirms its own slot (`CONFIG_KODEOS_BOOT_ROLE_APP=y`); holding BOT does it from any app. `kode_exit()` leaves on purpose.
 
 The code follows the style of the SDK's `components/khal`: a licence line and a Doxygen header on every file, documented calls, braces on their own lines, the constant on the left of a comparison, no ternaries, everything in English. The catalog's `tools/cstyle.py` fixes and lists most of it.
 
