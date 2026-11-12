@@ -13,7 +13,7 @@ The template is an empty app with the two shapes of code an app has:
 ## Requirements
 
 - ESP-IDF **v6.1** (`. ~/.espressif/v6.1/esp-idf/export.sh`).
-- SSH access to `kodediy/kode-sdk` and `kodediy/kode_slave_c5`. The component manager fetches the SDK over SSH, with its submodules.
+- Internet access to GitHub. The component manager fetches the SDK over HTTPS, with its submodules; both repositories are public, so no key is needed.
 
 ## Starting an app
 
@@ -42,7 +42,7 @@ The code follows the style of the SDK's `components/khal`: a licence line and a 
 idf.py build
 ```
 
-On a clean checkout the first build fetches the SDK from GitHub, with your SSH key, before it compiles. The board settings travel with the SDK.
+On a clean checkout the first build fetches the SDK from GitHub before it compiles. The board settings travel with the SDK.
 
 ## Installing on the Dot
 

@@ -49,8 +49,8 @@ if(NOT EXISTS "${KBSP_BOARD}" AND NOT KBSP_FETCH_PASS)
     if(NOT EXISTS "${KBSP_BOARD}")
         message(FATAL_ERROR
             "The SDK could not be fetched (cmake ended with ${KBSP_FETCH_RC}). "
-            "Read the first error above. A refused git fetch means that your "
-            "GitHub account does not list your SSH key.")
+            "Read the first error above. A failed git fetch usually means "
+            "that GitHub could not be reached.")
     endif()
 endif()
 
