@@ -61,10 +61,10 @@ The image is `build/my_app.bin`.
 
 ## Installing a build
 
-With kodeOS on screen, send the image over the USB cable with kodeOS's `kcli.py`; kodeOS installs it and starts it:
+With kodeOS on screen, send the image over the USB cable with `kcli.py`, the console tool in the KodeOS repository (`tools/kcli.py`); kodeOS installs it and starts it:
 
 ```bash
-python kcli.py -p PORT install build/my_app.bin
+python path/to/KodeOS/tools/kcli.py -p PORT install build/my_app.bin
 ```
 
 Say what an install keeps of the app's storage, and how to get back to kodeOS from an app that does not start: hold BOT and LEFT for about a second, which is a hardware reset.
