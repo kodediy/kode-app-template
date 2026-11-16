@@ -4,12 +4,11 @@
 ## manager rewrites those into git dependencies on the SDK at the commit
 ## pinned here. Moving to a newer SDK is this one version line.
 ##
-## SSH, not HTTPS: the SDK is private, and the manager runs
-## `git submodule update --init --recursive` over the whole of it when it
-## fetches any part - so one key has to cover the SDK and the C5 firmware
-## nested inside it.
+## The manager runs `git submodule update --init --recursive` over the whole
+## SDK when it fetches any part, so the C5 firmware nested inside it arrives
+## too. Both are public: no key is needed.
 dependencies:
   kodediy/kode:
     git: https://github.com/kodediy/kode-sdk.git
     path: components/kode
-    version: v0.1.0
+    version: v0.1.1

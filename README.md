@@ -74,4 +74,4 @@ The radio is off (`CONFIG_KODEOS_RADIO=n`, `CONFIG_ESP_HOSTED_ENABLED=n` and `CO
 
 ## Licence
 
-GPL-3.0-or-later, like the SDK it links: see `LICENSE`.
+GPL-3.0-or-later, like the SDK it links, with the additional permission for RFAL: see `LICENSE` and `NOTICE.md`.
