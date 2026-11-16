@@ -22,6 +22,7 @@ The template is an empty app with the two shapes of code an app has:
 3. Set what the launcher shows: `KODE_APP_MANIFEST("My app", "tools")` in `main/app_main.c`, the name on the pill and up to four categories from the catalog's `categories.txt`.
 4. Set the version: `PROJECT_VER` in `CMakeLists.txt`, raised for every version the catalog publishes.
 5. Replace `appdata/icon.png`, set `appdata/app.json` (its colour and a description of up to 52 characters) and replace the placeholder in `appdata/screenshots/` with screenshots of the app, taken with `kcli.py screenshot`.
+6. Give the app its own README: `git mv -f README.app.md README.md`, then fill it in. Its order puts first what a person arriving from the catalog looks for: what the app is and its screenshots, what it needs, how to use it and what it does; then, below a rule, how to build and install it. The comments in the file say which sections are optional.
 
 ## Writing the app
 
@@ -46,15 +47,21 @@ On a clean checkout the first build fetches the SDK from GitHub before it compil
 
 ## Installing on the Dot
 
-With kodeOS on the board, write the image to the app mailbox and let kodeOS adopt it:
+Install the image over the USB cable with `kcli.py`, the console tool in the KodeOS repository (`tools/kcli.py`). Run it from a clone of KodeOS, because it imports the files beside it; it needs pyserial, which an ESP-IDF environment already has.
 
 ```bash
-python -m esptool --chip esp32p4 -p /dev/cu.usbmodem101 write-flash 0x1C00000 build/my_app.bin
+python path/to/KodeOS/tools/kcli.py -p PORT install build/my_app.bin
 ```
 
-esptool resets the board at the end; kodeOS finds the image in the mailbox, installs it into the apps region and runs it. From then on the app survives the resets development produces (opening the serial port, `esp_restart()`, a crash), so a crashing app loops until you hold **BOT + LEFT** for about a second, which is a hardware reset and returns the board to kodeOS. The app stays installed and appears in the launcher.
+Opening the port resets the board into kodeOS, which takes the image, installs it into the apps region and starts it; `kcli.py` prints `installed and booting` and exits. `--no-run` installs it without starting it. The app runs once: any reset returns the board to kodeOS, a crash and opening the serial port included. The app stays installed and appears in Apps, which starts it again. From an app that does not start, hold **BOT + LEFT** for about a second, which is a hardware reset and returns the board to kodeOS.
 
-`idf.py -p /dev/cu.usbmodem101 monitor` shows the app's log. A running template prints `kaos.boot running as an app`, then `app.ao up` and `app.ao job done: status 0, value 0`.
+To see the app's log, open a monitor first, then start the app from Apps. Opening the monitor resets the board into kodeOS; the launch is a software reset, which keeps the port open, so the monitor shows the app from its first line.
+
+```bash
+idf.py -p PORT monitor
+```
+
+A running template prints `kaos.boot running as an app`, then `app.ao up` and `app.ao job done: status 0, value 0`.
 
 ## Publishing in the catalog
 
