@@ -48,12 +48,11 @@ Say what the app does without each of them.
 
 ## Building
 
-- ESP-IDF **v6.1**.
+- ESP-IDF **v6.1**, active in the terminal.
 - The kode SDK, pinned in `main/idf_component.yml` and fetched by the component manager on the first build.
 - Anything else the build fetches or needs, with its version.
 
 ```bash
-. ~/.espressif/v6.1/esp-idf/export.sh
 idf.py build
 ```
 
