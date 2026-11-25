@@ -69,7 +69,7 @@ Open a pull request on `kodediy/kode-apps` that adds the app as `apps/<name>`; t
 
 ## Updating the SDK
 
-The SDK version is the `version:` line in `main/idf_component.yml`. Change it and build; the catalog takes the newest release or the one before it.
+The SDK version is the `version:` line in `main/idf_component.yml`. Change it and build; the catalog takes any published release of the SDK's newest line (rule B1).
 
 ## The radio
 
