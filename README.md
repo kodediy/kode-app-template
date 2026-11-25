@@ -12,12 +12,12 @@ The template is an empty app with the two shapes of code an app has:
 
 ## Requirements
 
-- ESP-IDF **v6.1** (`. ~/.espressif/v6.1/esp-idf/export.sh`).
+- ESP-IDF **v6.1**, installed as [Espressif's guide](https://docs.espressif.com/projects/esp-idf/en/v6.1/esp32p4/get-started/) describes and active in the terminal you build from.
 - Internet access to GitHub. The component manager fetches the SDK over HTTPS, with its submodules; the SDK and the C5 firmware inside it are public, so no key is needed.
 
 ## Starting an app
 
-1. Create a repository `kodediy/kode-app-<name>` from this template ("Use this template" on GitHub).
+1. Create a repository named `kode-app-<name>` from this template ("Use this template" on GitHub). An app of the catalog lives in the `kodediy` organisation (rule A1); any other lives where you choose.
 2. Rename the project: `project(my_app)` in `CMakeLists.txt` becomes `project(<name>)`. The name is 1 to 31 characters of `a-z`, `0-9` and `_`, the same as in the repository name. It is the app's identity on the Dot and the name of the image, `build/<name>.bin`.
 3. Set what the launcher shows: `KODE_APP_MANIFEST("My app", "tools")` in `main/app_main.c`, the name on the pill and up to four categories from the catalog's `categories.txt`.
 4. Set the version: `PROJECT_VER` in `CMakeLists.txt`, raised for every version the catalog publishes.
